@@ -1,3 +1,4 @@
+from collections import defaultdict
 
 
 # noinspection PyUnusedLocal
@@ -10,5 +11,9 @@ def checkout(skus: str) -> int:
     :param skus: str of sku values
     
     """
-    raise NotImplementedError()
+    assert isinstance(skus, str), f"skus paramter should be of type str not {type(skus)}"
+    sku_list = skus.split(" ")
+    {}
+
+
 

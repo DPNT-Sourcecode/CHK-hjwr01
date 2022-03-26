@@ -15,18 +15,24 @@ class SkuItem():
     
     def calculate_cost(self, items_count: int) -> int:
         items_cost = 0
-        remaining_count = items_count
 
-        offer_amounts = list(self._lookup.keys())
-        offer_amounts.sort(reverse=True)
+        if self._id in self._unrelated_offers:
+            # check how many free Fs by checking groups of (2+1)
+            offer_counts = items_count // self._unrelated_offers[self._id]
+            # apply cost with reduced effective count
+            items_cost += 10*(items_count - offer_counts)
+        else:
+            remaining_count = items_count
+            offer_amounts = list(self._lookup.keys())
+            offer_amounts.sort(reverse=True)
 
-        for offer_units in offer_amounts:
-            offer_collection_price = self._lookup[offer_units]
+            for offer_units in offer_amounts:
+                offer_collection_price = self._lookup[offer_units]
+                
+                speacials_count = remaining_count // offer_units
+                remaining_count = remaining_count % offer_units
+
+                items_cost += speacials_count*offer_collection_price
             
-            speacials_count = remaining_count // offer_units
-            remaining_count = remaining_count % offer_units
-
-            items_cost += speacials_count*offer_collection_price
-        
-        assert remaining_count == 0
+            assert remaining_count == 0
         return items_cost

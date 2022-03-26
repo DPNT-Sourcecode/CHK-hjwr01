@@ -23,8 +23,8 @@ def cost_by_item_type(items_count: int, offer_lookup: dict):
 def prepare_sku_items():
     return {
         # these must go first
-        "U": SkuItem("U", {1: 40}), # todo
-        "F": SkuItem("F", {1: 15}), # todo
+        "U": SkuItem("U", {1: 40}, {"B": 3}), # todo
+        "F": SkuItem("F", {1: 15}, {"F": 2}), # todo
 
         # these are lower priority
         "A": SkuItem("A", {1: 50, 3: 130, 5:200}),
@@ -112,5 +112,6 @@ def checkout(skus: str) -> int:
         #     checkout_cost += 10*(sku_count - offer_counts)
 
     return checkout_cost
+
 
 

@@ -125,12 +125,3 @@ def checkout(skus: str) -> int:
             sku_counter[item_t] = 0 if sku_counter[item_t] < item_c else sku_counter[item_t] - item_c
 
     return checkout_cost
-
-
-
-
-
-
-
-
-

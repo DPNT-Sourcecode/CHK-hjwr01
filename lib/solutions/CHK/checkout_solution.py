@@ -22,12 +22,17 @@ def cost_by_item_type(items_count: int, offer_lookup: dict):
 
 def prepare_sku_items():
     return {
+        # these must go first
+        "U": SkuItem("U", {1: 40}), # todo
+        "F": SkuItem("F", {1: 15}), # todo
+
+        # these are lower priority
         "A": SkuItem("A", {1: 50, 3: 130, 5:200}),
         "B": SkuItem("B", {1: 30, 2: 45}),
         "C": SkuItem("C", {1: 20}),
         "D": SkuItem("D", {1: 15}),
         "E": SkuItem("E", {1: 15}, {"B": 2}),
-        "F": SkuItem("F", {1: 15}), # todo
+        
         "G": SkuItem("G", {1: 20}),
         "H": SkuItem("H", {1: 10, 5: 45, 10:80}),
         "I": SkuItem("I", {1: 35}),
@@ -42,7 +47,7 @@ def prepare_sku_items():
         "R": SkuItem("R", {1: 50}, {"Q": 3}),
         "S": SkuItem("S", {1: 30}),
         "T": SkuItem("T", {1: 20}),
-        "U": SkuItem("U", {1: 40}), # todo
+        
         "V": SkuItem("V", {1: 50, 2: 90, 3:130}),
         "W": SkuItem("W", {1: 20}),
         "X": SkuItem("X", {1: 90}),
@@ -64,7 +69,6 @@ def checkout(skus: str) -> int:
     assert isinstance(skus, str), f"skus paramter should be of type str not {type(skus)}"
     sku_counter = defaultdict(int)
     checkout_cost = 0
-    sku_type_priority = ['E', 'F', 'B', 'A', 'C', 'D' ]
     sku_items = prepare_sku_items()
     
 
@@ -75,15 +79,17 @@ def checkout(skus: str) -> int:
     # process input string and bin values
     for sku_item in skus:
         # check if illegal item type
-        if sku_item not in sku_type_priority:
+        if sku_item not in sku_items.keys():
             return -1
         sku_counter[sku_item] += 1
 
     
     # go through each bin and find associated cost for each item type
-    for sku_item_type in sku_type_priority:
+    for sku_item_type in sku_items.keys():
         sku_count = sku_counter[sku_item_type]
-        checkout_cost += sku_items[sku_item_type].calculate_cost(sku_count)
+        checkout_cost, unrelated_free_items += sku_items[sku_item_type].calculate_cost(sku_count)
+        for item_t, item_c in unrelated_free_items.items():
+            sku_counter[item_t] = 0 if sku_counter[item_t] < item_c else sku_counter['B'] - item_c
         # if sku_item_type == 'A':
         #     checkout_cost += cost_by_item_type(sku_count, {1: 50, 3: 130, 5:200})
         # elif sku_item_type == 'B':
@@ -106,4 +112,5 @@ def checkout(skus: str) -> int:
         #     checkout_cost += 10*(sku_count - offer_counts)
 
     return checkout_cost
+
 

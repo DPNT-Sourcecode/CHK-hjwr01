@@ -25,13 +25,14 @@ def prepare_sku_items():
         # these must go first
         "U": SkuItem("U", {1: 40}, {"B": 3}), # todo
         "F": SkuItem("F", {1: 15}, {"F": 2}), # todo
+        "E": SkuItem("E", {1: 15}, {"B": 2}),
 
         # these are lower priority
         "A": SkuItem("A", {1: 50, 3: 130, 5:200}),
         "B": SkuItem("B", {1: 30, 2: 45}),
         "C": SkuItem("C", {1: 20}),
         "D": SkuItem("D", {1: 15}),
-        "E": SkuItem("E", {1: 15}, {"B": 2}),
+        
         
         "G": SkuItem("G", {1: 20}),
         "H": SkuItem("H", {1: 10, 5: 45, 10:80}),
@@ -88,6 +89,7 @@ def checkout(skus: str) -> int:
     for sku_item_type in sku_items.keys():
         sku_count = sku_counter[sku_item_type]
         cost_item_type, unrelated_free_items = sku_items[sku_item_type].calculate_cost(sku_count)
+        print(f"cost_item_type: {cost_item_type}: sku_item_type")
         checkout_cost += cost_item_type
         for item_t, item_c in unrelated_free_items.items():
             sku_counter[item_t] = 0 if sku_counter[item_t] < item_c else sku_counter['B'] - item_c
@@ -113,6 +115,7 @@ def checkout(skus: str) -> int:
         #     checkout_cost += 10*(sku_count - offer_counts)
 
     return checkout_cost
+
 
 
 

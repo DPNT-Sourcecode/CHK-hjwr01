@@ -12,9 +12,9 @@ def checkout(skus: str) -> int:
     
     """
     assert isinstance(skus, str), f"skus paramter should be of type str not {type(skus)}"
-    sku_list = []
     sku_counter = defaultdict(int)
     checkout_cost = 0
+    sku_type_priority = ['C', 'D', 'B', 'A', 'E']
 
     # edge case wher no items
     if not skus:
@@ -22,11 +22,15 @@ def checkout(skus: str) -> int:
 
     # process input string and bin values
     for sku_item in skus:
+        # check if illegal item type
+        if sku_item not in sku_type_priority:
+            return -1
         sku_counter[sku_item] += 1
 
     
     # go through each bin and find associated cost for each item type
-    for sku_item_type, sku_count in sku_counter.items():
+    for sku_item_type in sku_type_priority:
+        sku_count = sku_counter[sku_item_type]
         if sku_item_type == 'A':
             # find number speacial offer collections and add to total
             speacials_count = sku_count // 3
@@ -53,5 +57,6 @@ def checkout(skus: str) -> int:
             return -1
 
     return checkout_cost
+
 
 

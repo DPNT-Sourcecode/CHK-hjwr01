@@ -68,8 +68,16 @@ def calculate_group_discount_offer_cost(sku_counter: dict,) -> int:
     total_cost += 45*total_speacials
 
     # calcualte remaining cost by priority
-    remainer_count = total_count % 3
-    for item_type in members:
+
+    remainer = total_count % 3
+    for item_sku in members.reverse():
+        if counter >= sku_counter[item_sku]:
+            counter -= sku_counter[item_sku]
+        if counter == 0:
+            break
+        pass
+
+    return total_cost
 
 
 
@@ -110,3 +118,4 @@ def checkout(skus: str) -> int:
             sku_counter[item_t] = 0 if sku_counter[item_t] < item_c else sku_counter[item_t] - item_c
 
     return checkout_cost
+

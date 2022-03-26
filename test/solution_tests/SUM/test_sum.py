@@ -1,8 +1,8 @@
 # from lib.solutions.SUM import sum_solution
 # import unittest
 
-import lib
-print(lib)
+# from lib import solutions
+from lib.solutions.SUM import sum_solution.SUM.sum_solution
 
 # class TestSum(unittest.TestCase):
 #     def test_sum(self):
@@ -11,4 +11,5 @@ print(lib)
 
 # if __name__ == "__main__":
 #     unittest.main()
+
 

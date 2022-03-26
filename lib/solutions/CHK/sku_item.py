@@ -8,7 +8,7 @@ class SkuItem():
         self._depends = {}
 
     
-    def cost_by_item_type(self, items_count: int) -> int:
+    def calculate_cost(self, items_count: int) -> int:
         items_cost = 0
         remaining_count = items_count
 

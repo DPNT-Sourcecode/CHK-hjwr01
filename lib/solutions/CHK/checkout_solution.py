@@ -22,7 +22,12 @@ def cost_by_item_type(items_count: int, offer_lookup: dict):
 
 def prepare_sku_items():
     return {
-        "A": SkuItem("A", {1: 50, 3: 130, 5:200})
+        "A": SkuItem("A", {1: 50, 3: 130, 5:200}),
+        "B": SkuItem("A", {1: 50, 2: 45}),
+        "C": SkuItem("A", {1: 20}),
+        "D": SkuItem("A", {1: 15}),
+        "D": SkuItem("A", {1: 15}),
+        "D": SkuItem("A", {1: 15}),
     }
 
 
@@ -58,7 +63,7 @@ def checkout(skus: str) -> int:
     # go through each bin and find associated cost for each item type
     for sku_item_type in sku_type_priority:
         sku_count = sku_counter[sku_item_type]
-        sku_items[sku_item_type].calculate_cost(sku_count)
+        checkout_cost += sku_items[sku_item_type].calculate_cost(sku_count)
         # if sku_item_type == 'A':
         #     checkout_cost += cost_by_item_type(sku_count, {1: 50, 3: 130, 5:200})
         # elif sku_item_type == 'B':
@@ -81,4 +86,5 @@ def checkout(skus: str) -> int:
         #     checkout_cost += 10*(sku_count - offer_counts)
 
     return checkout_cost
+
 

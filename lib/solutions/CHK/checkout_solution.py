@@ -1,5 +1,7 @@
 from collections import defaultdict
-from .sku_item import SkuItem
+
+from torch import remainder
+from sku_item import SkuItem
 
 def cost_by_item_type(items_count: int, offer_lookup: dict):
     items_cost = 0
@@ -57,7 +59,7 @@ def prepare_sku_items():
     }
 
 
-def calculate_group_discount_offer_cost(sku_counter: dict,) -> int:
+def calculate_group_discount_offer_cost(sku_counter: dict, sku_items: dict) -> int:
     # we want to benfit the customer, so order by priority of price
     # hard coded atm - TODO make not hard coded..
     total_cost = 0
@@ -70,12 +72,11 @@ def calculate_group_discount_offer_cost(sku_counter: dict,) -> int:
     # calcualte remaining cost by priority
 
     remainer = total_count % 3
-    for item_sku in members.reverse():
-        if counter >= sku_counter[item_sku]:
-            counter -= sku_counter[item_sku]
-        if counter == 0:
-            break
-        pass
+    if remainer:
+        for item_sku in members.reverse():
+            to_sell = max(sku_counter[item_sku], remainer)
+            remainder -= to_sell
+            total_cost += to_sell*sku_items[item_sku]._lookup[1]
 
     return total_cost
 
@@ -118,4 +119,5 @@ def checkout(skus: str) -> int:
             sku_counter[item_t] = 0 if sku_counter[item_t] < item_c else sku_counter[item_t] - item_c
 
     return checkout_cost
+
 

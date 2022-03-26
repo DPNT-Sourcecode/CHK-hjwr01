@@ -77,7 +77,7 @@ def calculate_group_discount_offer_cost(sku_counter: dict, sku_items: dict) -> i
             to_sell = max(sku_counter[item_sku], remainder)
             remainder -= to_sell
             print(sku_items)
-            print(item_sku)
+            print("item_sku: ",item_sku)
             print(sku_items[item_sku])
             total_cost += to_sell*sku_items[item_sku]._lookup[1]
 
@@ -113,7 +113,7 @@ def checkout(skus: str) -> int:
         sku_counter[sku_item] += 1
 
     # firsrt calucalte speacial group discounts
-    checkout_cost += calculate_group_discount_offer_cost(sku_counter, sku_item)
+    checkout_cost += calculate_group_discount_offer_cost(sku_counter, sku_items)
 
     # go through each bin and find associated cost for each item type
     for sku_item_type in sku_items.keys():
@@ -126,6 +126,7 @@ def checkout(skus: str) -> int:
             sku_counter[item_t] = 0 if sku_counter[item_t] < item_c else sku_counter[item_t] - item_c
 
     return checkout_cost
+
 
 
 

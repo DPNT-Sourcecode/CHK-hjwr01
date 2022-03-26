@@ -4,7 +4,7 @@ from checkout_solution import checkout
 
 class TestCheckout(unittest.TestCase):
     def test_checkout(self):
-        res = checkout("A B C D C C C")
+        res = checkout("ABCDCCC")
         self.assertEquals(res, 175)
 
     def test_checkout_empty(self):
@@ -16,14 +16,15 @@ class TestCheckout(unittest.TestCase):
             res = checkout([])
 
     def test_checkout_speacials(self):
-        res = checkout("A A A A B B")
+        res = checkout("AAAABB")
         self.assertEquals(res, 225)
 
     def test_checkout_wrong_input(self):
-        res = checkout("A A A TT B B")
+        res = checkout("AAATTBB")
         self.assertEquals(res, -1)
         
 
 if __name__ == '__main__':
     unittest.main()
+
 

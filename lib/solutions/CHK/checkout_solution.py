@@ -21,8 +21,7 @@ def checkout(skus: str) -> int:
         return 0
 
     # process input string and bin values
-    sku_list = skus.split(" ")
-    for sku_item in sku_list:
+    for sku_item in skus:
         sku_counter[sku_item] += 1
 
     
@@ -54,4 +53,5 @@ def checkout(skus: str) -> int:
             return -1
 
     return checkout_cost
+
 

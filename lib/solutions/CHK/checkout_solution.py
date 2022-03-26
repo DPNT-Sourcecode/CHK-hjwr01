@@ -23,9 +23,9 @@ def cost_by_item_type(items_count: int, offer_lookup: dict):
 def prepare_sku_items():
     return {
         # these must go first
-        "F": SkuItem("F", {1: 10}, {"F": 2}),
         "E": SkuItem("E", {1: 40}, {"B": 2}),
         "R": SkuItem("R", {1: 50}, {"Q": 3}),
+        "N": SkuItem("N", {1: 40}, {"M": 3}),
 
         # these are lower priority
         "A": SkuItem("A", {1: 50, 3: 130, 5:200}),
@@ -33,7 +33,7 @@ def prepare_sku_items():
         "C": SkuItem("C", {1: 20}),
         "D": SkuItem("D", {1: 15}),
         
-        
+        "F": SkuItem("F", {1: 10}, {"F": 2}),
         "G": SkuItem("G", {1: 20}),
         "H": SkuItem("H", {1: 10, 5: 45, 10:80}),
         "I": SkuItem("I", {1: 35}),
@@ -41,7 +41,7 @@ def prepare_sku_items():
         "K": SkuItem("K", {1: 80, 2: 150}),
         "L": SkuItem("L", {1: 90}),
         "M": SkuItem("M", {1: 15}),
-        "N": SkuItem("N", {1: 40}, {"M": 3}),
+        
         "O": SkuItem("O", {1: 10}),
         "P": SkuItem("P", {1: 50, 5: 200}),
         "Q": SkuItem("Q", {1: 30, 3: 80}),
@@ -89,11 +89,11 @@ def checkout(skus: str) -> int:
     for sku_item_type in sku_items.keys():
         sku_count = sku_counter[sku_item_type]
         cost_item_type, unrelated_free_items = sku_items[sku_item_type].calculate_cost(sku_count)
-        print(unrelated_free_items)
         checkout_cost += cost_item_type
         for item_t, item_c in unrelated_free_items.items():
-            sku_counter[item_t] = 0 if sku_counter[item_t] < item_c else sku_counter['B'] - item_c
+            sku_counter[item_t] = 0 if sku_counter[item_t] < item_c else sku_counter[item_t] - item_c
 
     return checkout_cost
+
 
 

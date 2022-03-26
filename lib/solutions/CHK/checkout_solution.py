@@ -46,15 +46,23 @@ def prepare_sku_items():
         "P": SkuItem("P", {1: 50, 5: 200}),
         "Q": SkuItem("Q", {1: 30, 3: 80}),
         
-        "S": SkuItem("S", {1: 30}),
+        "S": SkuItem("S", {1: 20}),
         "T": SkuItem("T", {1: 20}),
         "U": SkuItem("U", {1: 40}, {"U": 3}),
         "V": SkuItem("V", {1: 50, 2: 90, 3:130}),
         "W": SkuItem("W", {1: 20}),
-        "X": SkuItem("X", {1: 90}),
-        "Y": SkuItem("Y", {1: 10}),
-        "Z": SkuItem("Z", {1: 50}),
+        "X": SkuItem("X", {1: 17}),
+        "Y": SkuItem("Y", {1: 20}),
+        "Z": SkuItem("Z", {1: 21}),
     }
+
+
+def calculate_group_discount_offer_cost(sku_counter: dict, members: set) -> int:
+    # we want to benfit the customer, so order by priority of price
+    # hard coded atm - TODO make not hard coded..
+    priority = []
+    for item_type in members:
+
 
 
 # noinspection PyUnusedLocal
@@ -94,6 +102,7 @@ def checkout(skus: str) -> int:
             sku_counter[item_t] = 0 if sku_counter[item_t] < item_c else sku_counter[item_t] - item_c
 
     return checkout_cost
+
 
 
 

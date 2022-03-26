@@ -30,4 +30,3 @@ class SkuItem():
         
         assert remaining_count == 0
         return items_cost
-

@@ -14,4 +14,12 @@ class TestCheckout(unittest.TestCase):
     def test_checkout_wrong_format(self):
         with self.assertRaises(AssertionError):
             res = checkout([])
+
         
+    def test_checkout_speacials(self):
+        res = checkout("A A A A B B")
+        self.assertEquals(res, 175)
+        
+
+if __name__ == '__main__':
+    unittest.main()

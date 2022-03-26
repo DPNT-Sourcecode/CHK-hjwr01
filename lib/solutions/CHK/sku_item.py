@@ -39,4 +39,3 @@ class SkuItem():
             assert remaining_count == 0
         print(f"items_cost {self._id}", items_cost)
         return items_cost, self._calc_free_unrealted_items(items_count)
-

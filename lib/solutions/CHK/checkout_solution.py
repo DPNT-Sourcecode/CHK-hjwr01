@@ -57,10 +57,18 @@ def prepare_sku_items():
     }
 
 
-def calculate_group_discount_offer_cost(sku_counter: dict, members: set) -> int:
+def calculate_group_discount_offer_cost(sku_counter: dict,) -> int:
     # we want to benfit the customer, so order by priority of price
     # hard coded atm - TODO make not hard coded..
-    priority = []
+    total_cost = 0
+    members = ["Z", "Y", "S", "T", "X"]
+
+    total_count = sum([sku_counter[sku] for sku in members])
+    total_speacials = total_count // 3
+    total_cost += 45*total_speacials
+
+    # calcualte remaining cost by priority
+    remainer_count = total_count % 3
     for item_type in members:
 
 
@@ -102,8 +110,3 @@ def checkout(skus: str) -> int:
             sku_counter[item_t] = 0 if sku_counter[item_t] < item_c else sku_counter[item_t] - item_c
 
     return checkout_cost
-
-
-
-
-

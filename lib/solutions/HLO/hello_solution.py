@@ -3,5 +3,7 @@
 # noinspection PyUnusedLocal
 # friend_name = unicode string
 def hello(friend_name: str) -> str:
-    raise NotImplementedError()
+    assert isinstance(friend_name, str)
+    return f"Hello to {friend_name}"
+
 

@@ -16,11 +16,17 @@ def checkout(skus: str) -> int:
     sku_counter = defaultdict(int)
     checkout_cost = 0
 
+    # edge case wher no items
+    if not skus:
+        return 0
+
     # process input string and bin values
     sku_list = skus.split(" ")
     for sku_item in sku_list:
         sku_counter[sku_item] += 1
 
+    
+    # go through each bin and find associated cost for each item type
     for sku_item_type, sku_count in sku_counter.items():
         if sku_item_type == 'A':
             # find number speacial offer collections and add to total
@@ -48,3 +54,4 @@ def checkout(skus: str) -> int:
             return -1
 
     return checkout_cost
+

@@ -23,6 +23,10 @@ class TestCheckout(unittest.TestCase):
         res = checkout("AAATTBB")
         self.assertEquals(res, -1)
 
+    def test_checkout_new_E_offer(self):
+        res = checkout("AEEBB")
+        self.assertEquals(res, 160)
+
     # test helper function cost_by_item_type
 
     def test_cost_by_item_type(self):

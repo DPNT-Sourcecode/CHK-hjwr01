@@ -5,7 +5,8 @@ def cost_by_item_type(items_count: int, offer_lookup: dict):
     items_cost = 0
     remaining_count = items_count
 
-    offer_amounts = list(offer_lookup.keys()).sort(reverse=True)
+    offer_amounts = list(offer_lookup.keys())
+    offer_amounts.sort(reverse=True)
 
     for offer_units in offer_amounts:
         offer_collection_price = offer_lookup[offer_units]
@@ -59,7 +60,15 @@ def checkout(skus: str) -> int:
             checkout_cost += 20*sku_count
         elif sku_item_type == 'D':
             checkout_cost += 15*sku_count
+        elif sku_item_type == 'E':
+            checkout_cost += 40*sku_count
+            
+            # if elidgble for free B, then reduce only if already buying B
+            free_b_count = sku_count // 2
+            sku_counter['B'] = 0 if sku_counter['B'] < free_b_count else sku_counter['B'] - free_b_count
+
 
     return checkout_cost
+
 
 

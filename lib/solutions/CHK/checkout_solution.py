@@ -1,5 +1,5 @@
 from collections import defaultdict
-from sku_item import SkuItem
+from .sku_item import SkuItem
 
 def cost_by_item_type(items_count: int, offer_lookup: dict):
     items_cost = 0
@@ -115,6 +115,7 @@ def checkout(skus: str) -> int:
         #     checkout_cost += 10*(sku_count - offer_counts)
 
     return checkout_cost
+
 
 
 

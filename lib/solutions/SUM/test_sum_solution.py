@@ -1,5 +1,6 @@
 import unittest
-import sum_solution
+# import sum_solution
+from solutions.SUM import sum_solution
 
 # Having problems with with python finding the solutions library... Doing testing here to save time
 
@@ -30,4 +31,5 @@ class TestSum(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
 

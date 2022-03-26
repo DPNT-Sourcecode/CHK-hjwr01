@@ -1,5 +1,5 @@
 from collections import defaultdict
-
+from sku_item import SkuItem
 
 def cost_by_item_type(items_count: int, offer_lookup: dict):
     items_cost = 0
@@ -20,6 +20,10 @@ def cost_by_item_type(items_count: int, offer_lookup: dict):
     return items_cost
 
 
+def prepare_sku_items():
+    return {
+        "A": SkuItem("A", {1: 50, 3: 130, 5:200})
+    }
 
 
 # noinspection PyUnusedLocal
@@ -36,6 +40,8 @@ def checkout(skus: str) -> int:
     sku_counter = defaultdict(int)
     checkout_cost = 0
     sku_type_priority = ['E', 'F', 'B', 'A', 'C', 'D' ]
+    sku_items = prepare_sku_items()
+    
 
     # edge case wher no items
     if not skus:
@@ -52,25 +58,27 @@ def checkout(skus: str) -> int:
     # go through each bin and find associated cost for each item type
     for sku_item_type in sku_type_priority:
         sku_count = sku_counter[sku_item_type]
-        if sku_item_type == 'A':
-            checkout_cost += cost_by_item_type(sku_count, {1: 50, 3: 130, 5:200})
-        elif sku_item_type == 'B':
-            checkout_cost += cost_by_item_type(sku_count, {1: 30, 2: 45})
-        elif sku_item_type == 'C':
-            checkout_cost += 20*sku_count
-        elif sku_item_type == 'D':
-            checkout_cost += 15*sku_count
-        elif sku_item_type == 'E':
-            checkout_cost += 40*sku_count
+        sku_items[sku_item_type].calculate_cost(sku_count)
+        # if sku_item_type == 'A':
+        #     checkout_cost += cost_by_item_type(sku_count, {1: 50, 3: 130, 5:200})
+        # elif sku_item_type == 'B':
+        #     checkout_cost += cost_by_item_type(sku_count, {1: 30, 2: 45})
+        # elif sku_item_type == 'C':
+        #     checkout_cost += 20*sku_count
+        # elif sku_item_type == 'D':
+        #     checkout_cost += 15*sku_count
+        # elif sku_item_type == 'E':
+        #     checkout_cost += 40*sku_count
             
-            # if elidgble for free B, then reduce only if already buying B
-            free_b_count = sku_count // 2
-            sku_counter['B'] = 0 if sku_counter['B'] < free_b_count else sku_counter['B'] - free_b_count
+        #     # if elidgble for free B, then reduce only if already buying B
+        #     free_b_count = sku_count // 2
+        #     sku_counter['B'] = 0 if sku_counter['B'] < free_b_count else sku_counter['B'] - free_b_count
 
-        elif sku_item_type == 'F':
-            # check how many free Fs by checking groups of (2+1)
-            offer_counts = sku_count // 3
-            # apply cost with reduced effective count
-            checkout_cost += 10*(sku_count - offer_counts)
+        # elif sku_item_type == 'F':
+        #     # check how many free Fs by checking groups of (2+1)
+        #     offer_counts = sku_count // 3
+        #     # apply cost with reduced effective count
+        #     checkout_cost += 10*(sku_count - offer_counts)
 
     return checkout_cost
+

@@ -12,6 +12,8 @@ def compute(x: int, y: int):
     """
     assert isinstance(x, int)
     assert isinstance(y, int)
-    assert x >= 0 and y >= 0, f"Both arguemnts must bo non negative integers, not {x}, {y}"
+    assert x >= 0 and y >= 0, f"Both arguemnts must be non negative integers, not {x}, {y}"
+    assert x <= 100 and y <= 100, f"Both arguemnts must be less than or equal to 100, not {x}, {y}"
 
     return x + y
+

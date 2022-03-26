@@ -35,7 +35,7 @@ def checkout(skus: str) -> int:
     assert isinstance(skus, str), f"skus paramter should be of type str not {type(skus)}"
     sku_counter = defaultdict(int)
     checkout_cost = 0
-    sku_type_priority = ['E','B', 'A', 'C', 'D' ]
+    sku_type_priority = ['E', 'F', 'B', 'A', 'C', 'D' ]
 
     # edge case wher no items
     if not skus:
@@ -68,10 +68,13 @@ def checkout(skus: str) -> int:
             sku_counter['B'] = 0 if sku_counter['B'] < free_b_count else sku_counter['B'] - free_b_count
 
         elif sku_item_type == 'F':
-            pass
-
+            # check how many free Fs by checking groups of (2+1)
+            offer_counts = sku_count // 3
+            # apply cost with reduced effective count
+            checkout_cost += 10*(sku_count - offer_counts)
 
     return checkout_cost
+
 
 
 

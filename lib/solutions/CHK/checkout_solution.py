@@ -1,5 +1,5 @@
 from collections import defaultdict
-from sku_item import SkuItem
+from .sku_item import SkuItem
 
 def cost_by_item_type(items_count: int, offer_lookup: dict):
     items_cost = 0
@@ -94,6 +94,7 @@ def checkout(skus: str) -> int:
             sku_counter[item_t] = 0 if sku_counter[item_t] < item_c else sku_counter[item_t] - item_c
 
     return checkout_cost
+
 
 
 

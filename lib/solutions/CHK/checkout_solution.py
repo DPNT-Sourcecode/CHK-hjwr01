@@ -67,8 +67,12 @@ def checkout(skus: str) -> int:
             free_b_count = sku_count // 2
             sku_counter['B'] = 0 if sku_counter['B'] < free_b_count else sku_counter['B'] - free_b_count
 
+        elif sku_item_type == 'F':
+            pass
+
 
     return checkout_cost
+
 
 
 

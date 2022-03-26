@@ -27,6 +27,14 @@ class TestCheckout(unittest.TestCase):
         res = checkout("AEEBB")
         self.assertEquals(res, 160)
 
+    def test_checkout_new_F_offer(self):
+        res = checkout("FFF")
+        self.assertEquals(res, 20)
+
+    def test_checkout_F_offer_low_F(self):
+        res = checkout("FF")
+        self.assertEquals(res, 20)
+
     # test helper function cost_by_item_type
 
     def test_cost_by_item_type(self):
@@ -47,3 +55,4 @@ class TestCheckout(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+

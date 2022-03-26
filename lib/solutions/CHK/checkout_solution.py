@@ -40,7 +40,7 @@ def prepare_sku_items():
         "H": SkuItem("H", {1: 10, 5: 45, 10:80}),
         "I": SkuItem("I", {1: 35}),
         "J": SkuItem("J", {1: 60}),
-        "K": SkuItem("K", {1: 80, 2: 150}),
+        "K": SkuItem("K", {1: 70, 2: 120}),
         "L": SkuItem("L", {1: 90}),
         "M": SkuItem("M", {1: 15}),
         
@@ -125,6 +125,7 @@ def checkout(skus: str) -> int:
             sku_counter[item_t] = 0 if sku_counter[item_t] < item_c else sku_counter[item_t] - item_c
 
     return checkout_cost
+
 
 
 

@@ -10,6 +10,3 @@ from lib.solutions.SUM import sum_solution
 
 # if __name__ == "__main__":
 #     unittest.main()
-
-
-

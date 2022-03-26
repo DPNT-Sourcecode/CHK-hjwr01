@@ -16,4 +16,3 @@ def compute(x: int, y: int):
     assert x <= 100 and y <= 100, f"Both arguemnts must be less than or equal to 100, not {x}, {y}"
 
     return x + y
-

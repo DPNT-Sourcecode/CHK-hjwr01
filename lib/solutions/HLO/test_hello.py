@@ -6,11 +6,11 @@ class TestHello(unittest.TestCase):
 
     def test_hello(self):
         res = hello("Alec")
-        self.assertEquals(res, "hello to the world")
+        self.assertEquals(res, "Hello, World!")
     
     def test_hello_empty(self):
         res = hello("")
-        self.assertEquals(res, "hello to the world")
+        self.assertEquals(res, "Hello, World!")
 
     def test_hello_wrong_type(self):
         with self.assertRaises(AssertionError):
@@ -19,5 +19,3 @@ class TestHello(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-
-

@@ -15,4 +15,3 @@ class TestCheckout(unittest.TestCase):
         with self.assertRaises(AssertionError):
             res = checkout([])
         
-

@@ -26,8 +26,13 @@ def prepare_sku_items():
         "B": SkuItem("B", {1: 30, 2: 45}),
         "C": SkuItem("C", {1: 20}),
         "D": SkuItem("D", {1: 15}),
-        "E": SkuItem("E", {1: 15}),
-        "F": SkuItem("F", {1: 15}),
+        "E": SkuItem("E", {1: 15}, {"B": 2}),
+        "F": SkuItem("F", {1: 15}), # todo
+        "G": SkuItem("G", {1: 20}),
+        "H": SkuItem("H", {1: 10, 5: 45, 10:80}),
+        "I": SkuItem("I", {1: 35}),
+        "J": SkuItem("J", {1: 60}),
+        "K": SkuItem("K", {1: 80, 2: 150}),
     }
 
 
@@ -86,6 +91,7 @@ def checkout(skus: str) -> int:
         #     checkout_cost += 10*(sku_count - offer_counts)
 
     return checkout_cost
+
 
 
 

@@ -2,13 +2,15 @@
 
 class SkuItem():
     def __init__(self, id, lookup, other_offers=None) -> None:
-        self.id = id
+        self._id = id
         self._lookup = lookup
         self._unrelated_offers = other_offers if other_offers is not None else {}
 
     def _calc_free_unrealted_items(self, count):
         res = {}
-        for other_id, other_count in self._unrelated_offers:
+        for other_id, other_count in self._unrelated_offers.items():
+            if other_id == self._id:
+                continue
             # count how many free there should be
             res[other_id] = count//other_count
         return res
@@ -35,4 +37,4 @@ class SkuItem():
                 items_cost += speacials_count*offer_collection_price
             
             assert remaining_count == 0
-        return items_cost
+        return items_cost, self._calc_free_unrealted_items(items_count)

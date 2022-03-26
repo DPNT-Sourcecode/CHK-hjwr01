@@ -87,7 +87,8 @@ def checkout(skus: str) -> int:
     # go through each bin and find associated cost for each item type
     for sku_item_type in sku_items.keys():
         sku_count = sku_counter[sku_item_type]
-        checkout_cost, unrelated_free_items += sku_items[sku_item_type].calculate_cost(sku_count)
+        cost_item_type, unrelated_free_items = sku_items[sku_item_type].calculate_cost(sku_count)
+        checkout_cost += cost_item_type
         for item_t, item_c in unrelated_free_items.items():
             sku_counter[item_t] = 0 if sku_counter[item_t] < item_c else sku_counter['B'] - item_c
         # if sku_item_type == 'A':

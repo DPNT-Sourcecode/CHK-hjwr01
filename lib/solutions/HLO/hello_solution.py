@@ -4,6 +4,7 @@
 # friend_name = unicode string
 def hello(friend_name: str) -> str:
     assert isinstance(friend_name, str)
-    return f"Hello to {friend_name}"
+    return "hello to the world"
+
 
 

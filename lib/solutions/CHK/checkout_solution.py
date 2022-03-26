@@ -77,7 +77,7 @@ def calculate_group_discount_offer_cost(sku_counter: dict, sku_items: dict) -> i
     if remainder:
         for item_sku in members:
             print(f"item_sku: {item_sku}")
-            to_sell = remainder if remainder> sku_counter[item_sku] else sku_counter[item_sku]
+            to_sell = remainder if remainder <= sku_counter[item_sku] else sku_counter[item_sku]
             remainder -= to_sell
             total_cost += to_sell*sku_items[item_sku]._lookup[1]
             if remainder == 0:
@@ -128,6 +128,7 @@ def checkout(skus: str) -> int:
             sku_counter[item_t] = 0 if sku_counter[item_t] < item_c else sku_counter[item_t] - item_c
 
     return checkout_cost
+
 
 
 

@@ -24,17 +24,17 @@ class TestCheckout(unittest.TestCase):
     #     res = checkout("AAATTBB")
     #     self.assertEquals(res, -1)
 
-    def test_checkout_new_E_offer(self):
-        res = checkout("AEEBB")
-        self.assertEquals(res, 160)
+    # def test_checkout_new_E_offer(self):
+    #     res = checkout("AEEBB")
+    #     self.assertEquals(res, 160)
 
     # def test_checkout_new_F_offer(self):
     #     res = checkout("FFF")
     #     self.assertEquals(res, 20)
 
-    # def test_checkout_F_offer_low_F(self):
-    #     res = checkout("FF")
-    #     self.assertEquals(res, 20)
+    def test_checkout_F_offer_low_F(self):
+        res = checkout("FF")
+        self.assertEquals(res, 20)
 
     # def test_checkout_F_offer_8_F(self):
     #     res = checkout("FFFFFFFF")
@@ -60,4 +60,5 @@ class TestCheckout(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
 

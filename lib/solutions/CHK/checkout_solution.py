@@ -74,8 +74,3 @@ def checkout(skus: str) -> int:
             checkout_cost += 10*(sku_count - offer_counts)
 
     return checkout_cost
-
-
-
-
-

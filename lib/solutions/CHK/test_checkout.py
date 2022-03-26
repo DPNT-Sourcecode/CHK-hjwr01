@@ -40,26 +40,18 @@ class TestCheckout(unittest.TestCase):
         res = checkout("FFFFFFFF")
         self.assertEquals(res, 60)
 
-    # test helper function cost_by_item_type
+    def test_U(self):
+        res = checkout("UUUU")
+        self.assertEquals(res, 120)
+    
+    def test_U_1(self):
+        res = checkout("UUUUU")
+        self.assertEquals(res, 160)
 
-    def test_cost_by_item_type(self):
-        lookup = {1: 100, 3: 250, 5: 350}
-        res = cost_by_item_type(10, lookup)
-        self.assertEquals(res, 700)
-
-    def test_cost_by_item_type_1(self):
-        lookup = {1: 100, 3: 250, 5: 350}
-        res = cost_by_item_type(2, lookup)
-        self.assertEquals(res, 200)
-
-    def test_cost_by_item_type_2(self):
-        lookup = {1: 100, 3: 250, 5: 350}
-        res = cost_by_item_type(4, lookup)
-        self.assertEquals(res, 350)
+    def test_U_2(self):
+        res = checkout("UUUUUUUU")
+        self.assertEquals(res, 240)
         
 
 if __name__ == '__main__':
     unittest.main()
-
-
-

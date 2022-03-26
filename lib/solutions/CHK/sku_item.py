@@ -13,7 +13,6 @@ class SkuItem():
                 continue
             # count how many free there should be
             res[other_id] = count//other_count
-        print(f"here {self._id}: {res}")
         return res
     
     def calculate_cost(self, items_count: int) -> int:
@@ -39,6 +38,3 @@ class SkuItem():
             
             assert remaining_count == 0
         return items_cost, self._calc_free_unrealted_items(items_count)
-
-
-

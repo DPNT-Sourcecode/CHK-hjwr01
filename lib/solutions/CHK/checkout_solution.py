@@ -1,5 +1,5 @@
 from collections import defaultdict
-from .sku_item import SkuItem
+from sku_item import SkuItem
 
 def cost_by_item_type(items_count: int, offer_lookup: dict):
     items_cost = 0
@@ -25,6 +25,7 @@ def prepare_sku_items():
         # these must go first
         "F": SkuItem("F", {1: 10}, {"F": 2}),
         "E": SkuItem("E", {1: 40}, {"B": 2}),
+        "R": SkuItem("R", {1: 50}, {"Q": 3}),
 
         # these are lower priority
         "A": SkuItem("A", {1: 50, 3: 130, 5:200}),
@@ -44,7 +45,6 @@ def prepare_sku_items():
         "O": SkuItem("O", {1: 10}),
         "P": SkuItem("P", {1: 50, 5: 200}),
         "Q": SkuItem("Q", {1: 30, 3: 80}),
-        "R": SkuItem("R", {1: 50}, {"Q": 3}),
         "S": SkuItem("S", {1: 30}),
         "T": SkuItem("T", {1: 20}),
         "U": SkuItem("U", {1: 40}, {"U": 3}),
@@ -91,25 +91,6 @@ def checkout(skus: str) -> int:
         checkout_cost += cost_item_type
         for item_t, item_c in unrelated_free_items.items():
             sku_counter[item_t] = 0 if sku_counter[item_t] < item_c else sku_counter['B'] - item_c
-        # if sku_item_type == 'A':
-        #     checkout_cost += cost_by_item_type(sku_count, {1: 50, 3: 130, 5:200})
-        # elif sku_item_type == 'B':
-        #     checkout_cost += cost_by_item_type(sku_count, {1: 30, 2: 45})
-        # elif sku_item_type == 'C':
-        #     checkout_cost += 20*sku_count
-        # elif sku_item_type == 'D':
-        #     checkout_cost += 15*sku_count
-        # elif sku_item_type == 'E':
-        #     checkout_cost += 40*sku_count
-            
-        #     # if elidgble for free B, then reduce only if already buying B
-        #     free_b_count = sku_count // 2
-        #     sku_counter['B'] = 0 if sku_counter['B'] < free_b_count else sku_counter['B'] - free_b_count
-
-        # elif sku_item_type == 'F':
-        #     # check how many free Fs by checking groups of (2+1)
-        #     offer_counts = sku_count // 3
-        #     # apply cost with reduced effective count
-        #     checkout_cost += 10*(sku_count - offer_counts)
 
     return checkout_cost
+

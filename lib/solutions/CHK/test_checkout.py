@@ -51,6 +51,10 @@ class TestCheckout(unittest.TestCase):
     def test_U_2(self):
         res = checkout("UUUUUUUU")
         self.assertEquals(res, 240)
+
+    def test_R(self):
+        res = checkout("RRRQ")
+        self.assertEquals(res, 150)
         
 
 if __name__ == '__main__':

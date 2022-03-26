@@ -1,6 +1,26 @@
 from collections import defaultdict
 
 
+def cost_by_item_type(items_count: int, offer_lookup: dict):
+    items_cost = 0
+    remaining_count = items_count
+
+    offer_amounts = list(offer_lookup.keys()).sort(reverse=True)
+
+    for offer_units in offer_amounts:
+        offer_collection_price = offer_lookup[offer_units]
+        
+        speacials_count = remaining_count // offer_units
+        remaining_count = remaining_count % offer_units
+
+        items_cost += speacials_count*offer_collection_price
+    
+    assert remaining_count == 0
+    return items_cost
+
+
+
+
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus: str) -> int:
@@ -32,28 +52,13 @@ def checkout(skus: str) -> int:
     for sku_item_type in sku_type_priority:
         sku_count = sku_counter[sku_item_type]
         if sku_item_type == 'A':
-            # find number speacial offer collections and add to total
-            speacials_count = sku_count // 3
-            checkout_cost += speacials_count*130
-
-            # find remainder normal cost items and add to total
-            normal_count = sku_count % 3
-            checkout_cost += normal_count*50
-
+            checkout_cost += cost_by_item_type(sku_count, {1: 50, 3: 130, 5:200})
         elif sku_item_type == 'B':
-            # find number speacial offer collections and add to total
-            speacials_count = sku_count // 2
-            checkout_cost += speacials_count*45
-
-            # find remainder normal cost items and add to total
-            normal_count = sku_count % 2
-            checkout_cost += normal_count*30
+            checkout_cost += cost_by_item_type(sku_count, {1: 30, 2: 45})
         elif sku_item_type == 'C':
             checkout_cost += 20*sku_count
         elif sku_item_type == 'D':
             checkout_cost += 15*sku_count
-        else:
-            # ERROR
-            return -1
 
     return checkout_cost
+

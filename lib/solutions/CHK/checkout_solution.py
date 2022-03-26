@@ -45,6 +45,7 @@ def prepare_sku_items():
         "O": SkuItem("O", {1: 10}),
         "P": SkuItem("P", {1: 50, 5: 200}),
         "Q": SkuItem("Q", {1: 30, 3: 80}),
+        
         "S": SkuItem("S", {1: 30}),
         "T": SkuItem("T", {1: 20}),
         "U": SkuItem("U", {1: 40}, {"U": 3}),
@@ -88,9 +89,11 @@ def checkout(skus: str) -> int:
     for sku_item_type in sku_items.keys():
         sku_count = sku_counter[sku_item_type]
         cost_item_type, unrelated_free_items = sku_items[sku_item_type].calculate_cost(sku_count)
+        print(unrelated_free_items)
         checkout_cost += cost_item_type
         for item_t, item_c in unrelated_free_items.items():
             sku_counter[item_t] = 0 if sku_counter[item_t] < item_c else sku_counter['B'] - item_c
 
     return checkout_cost
+
 
